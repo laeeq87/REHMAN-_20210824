@@ -57,12 +57,12 @@ class Upload extends React.Component {
       }
   }
 
-   onChangeHandler(event) {
-    this.setState({selectedFile : event.target.files[0]});
+   onChangeHandler = (event) => {
+    this.setState({selectedFile: event.target.files[0]})
  }
 
 
- valid () {
+  valid () {
   const { title, category, selectedFile } = this.state
    if (title.length < 1 || category < 1 || selectedFile === null) {
      return true;
