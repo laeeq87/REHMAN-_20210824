@@ -4,7 +4,7 @@ import { Container, } from 'react-bootstrap'
 
 export const Layout = (props) => {
     return (
-    <Container>
+    <Container data-testid= "tst-layout">
     {props.children}
     </Container>
     )

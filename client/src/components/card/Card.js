@@ -10,8 +10,8 @@ export const VideoCard = (props) => {
             <Card style={{ width: 350, height: 300, borderRadius: 10 }}>
             <Card.Img style={{ width: 350, height: 200, borderRadius: 10 }} variant="top" src={thumbnailPath} />
             <Card.Body>
-                <Card.Title><strong>{props.title}</strong></Card.Title>
-                <Card.Text><strong>Category: </strong>{props.category}</Card.Text>
+                <Card.Title data-testid="tst-title"><strong>{props.title}</strong></Card.Title>
+                <Card.Text data-testid="tst-category"><strong>Category: </strong>{props.category}</Card.Text>
             </Card.Body>
             </Card>
         </OverlayTrigger>

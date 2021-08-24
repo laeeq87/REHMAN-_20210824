@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Button , Row } from "react-bootstrap";
 import axios from 'axios';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -57,20 +57,12 @@ class Upload extends React.Component {
       }
   }
 
-
-  categorySelect = () => {
-      this.state.categories.map((e, key) => {
-      return <option key={key} value={e.id}>{e.title}</option>;
-      })
-    }
-
-
-   onChangeHandler = async event => {
+   onChangeHandler(event) {
     this.setState({selectedFile : event.target.files[0]});
  }
 
 
- valid() {
+ valid () {
   const { title, category, selectedFile } = this.state
    if (title.length < 1 || category < 1 || selectedFile === null) {
      return true;
@@ -123,7 +115,7 @@ class Upload extends React.Component {
  }
 
  selectFunction() {
-  let data = [<option value={0}>Choose...</option>];
+  let data = [<option key={-1} value={0}>Choose...</option>];
   this.state.categories.map((e, key) => {
   data.push(<option key={key} value={e.id}>{e.title}</option>);
 });
@@ -133,39 +125,39 @@ return data
   render() {
     const { uploadPercentage } = this.state;
   return(
-      <div className="mt-5">
-      <Form>
-          <Row className="mb-3">
-            <Form.Group className="mb-3 col-md-6" controlId="videoTitle">
-              <Form.Label >Video Title:</Form.Label>
-              <Form.Control type="text" placeholder="Enter Title" value={this.state.title} onChange={(event)=> {this.setState({title: event.target.value})}}/>
+      <div className="mt-5" data-testid="tst-upload" >
+        <Form>
+            <Row className="mb-3">
+              <Form.Group className="mb-3 col-md-6" controlId="videoTitle">
+                <Form.Label >Video Title:</Form.Label>
+                <Form.Control type="text" placeholder="Enter Title" value={this.state.title} onChange={(event)=> {this.setState({title: event.target.value})}}/>
+              </Form.Group>
+            </Row>
+
+            <Row className="mb-3">
+            <Form.Group className="mb-3 col-md-6" controlId="formSelect">
+                <Form.Label>Category:</Form.Label>
+                  <Form.Select  onChange={(event)=> {this.setState({category: event.target.value})}}>
+                    {this.selectFunction()}
+                  </Form.Select>
+              </Form.Group>
+            </Row>
+
+            <Row className="mb-3">
+            <Form.Group className="mb-3 col-md-6" controlId="formSelectFile">
+              <Form.Label>Upload Video File:</Form.Label>
+              <Form.Control type="file" name="video" onChange={this.onChangeHandler}/>
             </Form.Group>
-          </Row>
+            </Row>
 
-          <Row className="mb-3">
-          <Form.Group className="mb-3 col-md-6" controlId="formGridPassword">
-              <Form.Label>Category:</Form.Label>
-                <Form.Select onChange={(event)=> {this.setState({category: event.target.value})}}>
-                  {this.selectFunction()}
-                </Form.Select>
-            </Form.Group>
-          </Row>
+            <Row className="mb-3">
+            { uploadPercentage > 0 && <ProgressBar now={uploadPercentage}  active label={`${uploadPercentage}%`} />}
+            </Row>
 
-          <Row className="mb-3">
-          <Form.Group className="mb-3 col-md-6" controlId="formGridAddress1">
-            <Form.Label>Upload Video File:</Form.Label>
-            <Form.Control type="file" name="video" onChange={this.onChangeHandler}/>
-          </Form.Group>
-          </Row>
-
-          <Row className="mb-3">
-          { uploadPercentage > 0 && <ProgressBar now={uploadPercentage}  active label={`${uploadPercentage}%`} />}
-          </Row>
-
-          <Button variant="primary" disabled={this.valid()} onClick={this.onUploadClickHandler}>
-            Upload
-          </Button>
-       </Form>
+            <Button data-testid="tst-upload-btn" variant="primary" disabled={this.valid()} onClick={this.onUploadClickHandler}>
+              Upload
+            </Button>
+        </Form>
       </div>
     );
   }

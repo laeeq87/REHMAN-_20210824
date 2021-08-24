@@ -51,9 +51,9 @@ class Main extends React.Component {
 
         render() {
             return (
-                <div className="row mt-5">
+                <div data-testid="tst-main-component" className="row mt-5">
                     <div className="col-4 overflow-auto">
-                    {this.getVideoCards()}
+                     {this.getVideoCards()}
                     </div>
                     <div className="col-8 mt-3">
                     {this.state.player}

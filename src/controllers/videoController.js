@@ -16,17 +16,15 @@ module.exports = class VideoController {
         try {
             const { title: videoTitle, category } = req.body;
             const { path: filePath , filename}  = req.file;
-            const thumbnails =  await generateThumbnail(filePath);
             const thumbnailData = [];
 
             const createVideo = await models.Video.create({ title: videoTitle, location: filename, category_id: parseInt(category)}).catch(err => {
-                console.log('error==>', err);
-                res.json(errorResponse(400, 'error saving video', err));
+                return res.json(errorResponse(400, 'error saving video', err));
             })
             
-
             if (createVideo.dataValues) {
 
+                const thumbnails =  await generateThumbnail(filePath);
                 const createdVideoId = createVideo.dataValues.id;
 
                 thumbnails.map((t) => {

@@ -12,12 +12,9 @@ const { successResponse, errorResponse } = require("../utils/response")
  * @param {object} response
  * @param {function} next
  */
- module.exports = (req, res, next) => {
+ module.exports =  (req, res, next) => {
      
-    uploadFile(req, res, (err) => {
-        
-        console.log('middleware error', err)
-
+     uploadFile(req, res, (err) => {
         if (err instanceof multer.MulterError) {  // A Multer error occurred when uploading.
             return res.json(errorResponse(400, err.message, err))
         } else if (err) {

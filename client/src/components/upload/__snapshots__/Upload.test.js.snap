@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="mt-5"
+  data-testid="tst-upload"
+>
+  <form
+    className=""
+  >
+    <div
+      className="mb-3 row"
+    >
+      <div
+        className="mb-3 col-md-6"
+      >
+        <label
+          className="form-label"
+          htmlFor="videoTitle"
+        >
+          Video Title:
+        </label>
+        <input
+          className="form-control"
+          id="videoTitle"
+          onChange={[Function]}
+          placeholder="Enter Title"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="mb-3 row"
+    >
+      <div
+        className="mb-3 col-md-6"
+      >
+        <label
+          className="form-label"
+          htmlFor="formSelect"
+        >
+          Category:
+        </label>
+        <select
+          className="form-select"
+          id="formSelect"
+          onChange={[Function]}
+        >
+          <option
+            value={0}
+          >
+            Choose...
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="mb-3 row"
+    >
+      <div
+        className="mb-3 col-md-6"
+      >
+        <label
+          className="form-label"
+          htmlFor="formSelectFile"
+        >
+          Upload Video File:
+        </label>
+        <input
+          className="form-control"
+          id="formSelectFile"
+          name="video"
+          onChange={[Function]}
+          type="file"
+        />
+      </div>
+    </div>
+    <div
+      className="mb-3 row"
+    />
+    <button
+      className="btn btn-primary"
+      data-testid="tst-upload-btn"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      Upload
+    </button>
+  </form>
+</div>
+`;

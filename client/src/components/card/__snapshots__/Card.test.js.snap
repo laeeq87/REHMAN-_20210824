@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="mt-3"
+>
+  <div
+    className="card"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseOut={[Function]}
+    onMouseOver={[Function]}
+    style={
+      Object {
+        "borderRadius": 10,
+        "height": 300,
+        "width": 350,
+      }
+    }
+  >
+    <img
+      className="card-img-top"
+      src="http://localhost:5000/thumbnails/undefined"
+      style={
+        Object {
+          "borderRadius": 10,
+          "height": 200,
+          "width": 350,
+        }
+      }
+    />
+    <div
+      className="card-body"
+    >
+      <div
+        className="card-title h5"
+        data-testid="tst-title"
+      >
+        <strong />
+      </div>
+      <p
+        className="card-text"
+        data-testid="tst-category"
+      >
+        <strong>
+          Category: 
+        </strong>
+      </p>
+    </div>
+  </div>
+</div>
+`;
