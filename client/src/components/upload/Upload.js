@@ -33,7 +33,7 @@ class Upload extends React.Component {
       await this.getCategories();
   }
 
-  getCategories = async()=> {
+  getCategories = async ()=> {
       try {
           const response = await axios.get('http://localhost:5000/api/category');
           if (response.status === 200 & response.data.data.length > 0) {
@@ -104,6 +104,14 @@ class Upload extends React.Component {
     }
  }
 
+ selectFunction() {
+  let data = [<option value={0}>Choose...</option>];
+  this.state.categories.map((e, key) => {
+  data.push(<option key={key} value={e.id}>{e.title}</option>);
+});
+return data
+}
+
   render() {
     const { uploadPercentage } = this.state;
   return(
@@ -119,12 +127,8 @@ class Upload extends React.Component {
           <Row className="mb-3">
           <Form.Group className="mb-3 col-md-6" controlId="formGridPassword">
               <Form.Label>Category:</Form.Label>
-                <Form.Select value={this.state.category} onChange={(event)=> {this.setState({category: event.target.value})}}>
-                  {
-                      this.state.categories.map((e, key) => {
-                      return <option key={key} value={e.id}>{e.title}</option>;
-                      })
-                  }
+                <Form.Select onChange={(event)=> {this.setState({category: event.target.value})}}>
+                  {this.selectFunction()}
                 </Form.Select>
             </Form.Group>
           </Row>

@@ -17,8 +17,7 @@ module.exports = class CategoriesController {
 
         try {
             const categories = await models.Category.findAll().catch(err => {
-                console.log('unable to find catergories', err);
-                return;
+                return err;
             });
 
             if (categories.length === 0) {
@@ -27,17 +26,14 @@ module.exports = class CategoriesController {
                 { title: 'Education', description: 'All the video related to Education, Learning & Personal Grooming' },
                 { title: 'Recipe', description: 'All the video related to Food' }
             ]).catch(err => {
-                console.log('error ==>', err)
+                return err;
             })
-            console.log('created categoris');
             return true;
             }
-            console.log('Categories already present')
             return false;
 
         } catch (err) {
-            console.log('error =>', err)
-            return;
+            return err;
         }
     }
 
@@ -51,7 +47,6 @@ module.exports = class CategoriesController {
 
         try {
             const categories = await models.Category.findAll().catch(err => {
-                console.log('unable to find catergories', err);
                 return res.json(errorResponse(404, "categories not found"))
             });
 
@@ -59,8 +54,7 @@ module.exports = class CategoriesController {
                 return res.json(successResponse(200, "success", categories))
             }
         } catch (err) {
-            console.log('error =>', err)
-            return res.json(errorResponse(400, "error getting categories", errorResponse))
+            return res.json(errorResponse(400, "error getting categories", err))
         }
     }
 }
