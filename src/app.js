@@ -23,18 +23,20 @@ app.use(express.static(__dirname + '/public'));
 // All the routes are defiend in Routes directory
 app.use('/api', router);
 
-if (catCheck === true) {
-const checkCategories = new Promise((resolve, reject) => {
-  const categories = createCategories();
-  resolve(categories)
-});
+// -------------- UNCOMMENT BELOW TILL LINE 38 TO ADD CATEGORIES ON FIRST START  ----------------//
 
-checkCategories.then((data)=> {
-  if (data === false) {
-    catCheck = false;
-  }
-  })
-}
+// if (catCheck === true) {
+// const checkCategories = new Promise((resolve, reject) => {
+//   const categories = createCategories();
+//   resolve(categories)
+// });
+
+// checkCategories.then((data)=> {
+//   if (data === false) {
+//     catCheck = false;
+//   }
+//   })
+// }
 
 
 module.exports = app;
