@@ -3,15 +3,17 @@ Video App to Upload &amp; Run Video Content
 
 Project Information
 
-This Webapp is developed on Node.Js(backend) & React.JS(frontend). 
-The database I have used for this Project is PostgresSql. I have used Sequelize as database ORM for this project.
-Jest & React testing Library is used for Unit testing of both Frontend & Backend. I have developed some basic API and component testing for both of the applications.
-Frontend application is present in the root folder with name client.
+- This Webapp is developed on Node.Js(backend) & React.JS(frontend). 
+- The database I have used for this Project is PostgresSql. I have used Sequelize as database ORM for this project.
+- Jest & React testing Library is used for Unit testing of both Frontend & Backend. I have developed some basic API and component testing for both of the applications.
+- Frontend application is present in the root folder with name client.
+- All the videos & thumbnails will be uploaded to the public folder in root directory.
 
 
 Build Project Instructions (STEPS)
 
 - Clone the Repository
+- Please Install ffmpeg in your system (very importent).
 - Create two databases in Postgres (PG-ADMIN) with names (videoapp & videoapp_test)
 - Please Provide DB credentials in the .ENV file, located at the root direcotry.
 - cd into root directory & run npm install/ yarn install. It will install all the dependencies Backend.
