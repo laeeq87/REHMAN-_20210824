@@ -2,17 +2,19 @@ import React from 'react'
 import { Form, Button , Row } from "react-bootstrap";
 import axios from 'axios';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-// import Alert from 'react-bootstrap/Alert'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 const initialState = {
   title: '',
-  category: '',
+  category: 0,
   uploadPercentage: 0,
   selectedFile: null
 };
 
+toast.configure();
 
 class Upload extends React.Component {
   constructor(props) {
@@ -20,11 +22,9 @@ class Upload extends React.Component {
       this.state = { 
           categories: [],
           title: '',
-          category: '',
+          category: 0,
           uploadPercentage: 0,
-          selectedFile: null,
-          showAlert: false,
-          alertMessage: '',
+          selectedFile: null
        };
     }
 
@@ -33,7 +33,20 @@ class Upload extends React.Component {
       await this.getCategories();
   }
 
-  getCategories = async ()=> {
+  notify = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+  }
+
+
+  getCategories = async () => {
       try {
           const response = await axios.get('http://localhost:5000/api/category');
           if (response.status === 200 & response.data.data.length > 0) {
@@ -44,10 +57,6 @@ class Upload extends React.Component {
       }
   }
 
-  handleSubmit = (event) =>  {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
 
   categorySelect = () => {
       this.state.categories.map((e, key) => {
@@ -58,6 +67,15 @@ class Upload extends React.Component {
 
    onChangeHandler = async event => {
     this.setState({selectedFile : event.target.files[0]});
+ }
+
+
+ valid() {
+  const { title, category, selectedFile } = this.state
+   if (title.length < 1 || category < 1 || selectedFile === null) {
+     return true;
+   }
+   return false
  }
 
   onUploadClickHandler = async () =>  {
@@ -82,6 +100,7 @@ class Upload extends React.Component {
     try {
       const response = await axios.post('http://localhost:5000/api/video/upload', data, options)
       .catch(err => {
+        this.notify(err);
         console.log('Error ==>');
       })
 
@@ -92,9 +111,8 @@ class Upload extends React.Component {
       })
 
       if (response.status === 200 & response.data.code !== 201) {
+        this.notify(response.data.message)
         this.setState(prevState => ({
-          showAlert: true,
-          alertMessage: response.data.message,
           initialState
         }));
 
@@ -144,9 +162,7 @@ return data
           { uploadPercentage > 0 && <ProgressBar now={uploadPercentage}  active label={`${uploadPercentage}%`} />}
           </Row>
 
-          {/* {this.state.showAlert === true ? <Alert variant={"danger"} >{this.state.alertMessage}</Alert> : ''} */}
-
-          <Button variant="primary" onClick={this.onUploadClickHandler}>
+          <Button variant="primary" disabled={this.valid()} onClick={this.onUploadClickHandler}>
             Upload
           </Button>
        </Form>
