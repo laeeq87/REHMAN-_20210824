@@ -1,0 +1,15 @@
+name: Laeeq
+age: 28
+address: 'dhuwi: wwwmkd'
+active: true
+key:
+    key: value
+    key2: 33
+    key3:
+        key: value
+        key2: value
+array:
+    - item1
+    - item2
+    -
+        key: value
